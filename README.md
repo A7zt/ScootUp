@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScootUp | سكوت أب - خدمات الحرم الجامعي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #00E676;
+      --primary-dark: #00B0FF;
+      --accent: #FFD600;
+      --dark-bg: #0F172A;
+      --card-bg: #1E293B;
+      --card-hover: #334155;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border-color: #334155;
+      --danger: #FF5252;
+      --radius-lg: 20px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-main);
+      padding-bottom: 80px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 992px) {
+      body {
+        padding-bottom: 0;
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--dark-bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--card-hover);
+      border-radius: 4px;
+    }
+
+    /* HEADER / NAVBAR */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 16px;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+
+    .logo-icon {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #000;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
+    }
+
+    .logo span {
+      background: linear-gradient(to right, #00E676, #00B0FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 500px;
+      position: relative;
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .search-bar {
+        display: block;
+      }
+    }
+
+    .search-bar input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 10px 40px 10px 16px;
+      border-radius: 30px;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .search-bar input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(0, 230, 118, 0.2);
+    }
+
+    .search-bar i {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-cart-desktop {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .btn-cart-desktop:hover {
+      border-color: var(--primary);
+      background: var(--card-hover);
+    }
+
+    @media (min-width: 992px) {
+      .btn-cart-desktop {
+        display: flex;
+      }
+    }
+
+    .cart-badge {
+      background: var(--primary);
+      color: #000;
+      font-size: 0.75rem;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    /* HERO BANNER */
+    .hero-container {
+      max-width: 1200px;
+      margin: 16px auto;
+      padding: 0 16px;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    @media (min-width: 768px) {
+      .hero-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 36px;
+      }
+    }
+
+    .hero-content {
+      z-index: 2;
+      max-width: 550px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 230, 118, 0.15);
+      color: var(--primary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #000;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .hero-btn:active {
+      transform: scale(0.96);
+    }
+
+    .hero-icon-bg {
+      position: absolute;
+      left: -20px;
+      bottom: -30px;
+      font-size: 10rem;
+      color: rgba(255, 255, 255, 0.03);
+      transform: rotate(-15deg);
+      pointer-events: none;
+    }
+
+    /* MOBILE SEARCH BAR */
+    .mobile-search {
+      padding: 0 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .mobile-search {
+        display: none;
+      }
+    }
+
+    .mobile-search .search-bar {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* MAIN CONTAINER */
+    .main-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* CATEGORIES BAR */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .categories-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+      scrollbar-width: none;
+    }
+
+    .categories-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 10px 18px;
+      border-radius: 30px;
+      white-space: nowrap;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .category-chip.active, .category-chip:hover {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #000;
+      border-color: transparent;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(0, 230, 118, 0.25);
+    }
+
+    /* PRODUCTS GRID (RESPONSIVE) */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    @media (min-width: 600px) {
+      .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, border-color 0.3s;
+      position: relative;
+    }
+
+    .product-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    .product-img-wrapper {
+      width: 100%;
+      height: 120px;
+      background: var(--card-hover);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .product-img-wrapper {
+        height: 160px;
+      }
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(4px);
+      color: var(--text-main);
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .product-details {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .product-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .product-title {
+        font-size: 1rem;
+      }
+    }
+
+    .product-vendor {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .product-price {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .btn-add {
+      background: rgba(0, 230, 118, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(0, 230, 118, 0.3);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-add:hover {
+      background: var(--primary);
+      color: #000;
+    }
+
+    /* SCOOT EXPRESS SPECIAL SECTION */
+    .express-banner {
+      background: linear-gradient(135deg, rgba(0, 176, 255, 0.1) 0%, rgba(0, 230, 118, 0.1) 100%);
+      border: 1px dashed var(--primary-dark);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .express-banner {
+        flex-direction: row;
+        text-align: right;
+        justify-content: space-between;
+        padding: 24px;
+      }
+    }
+
+    .express-info h3 {
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    .express-info p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* BOTTOM NAV (MOBILE) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      z-index: 99;
+    }
+
+    @media (min-width: 992px) {
+      .bottom-nav {
+        display: none;
+      }
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+    }
+
+    .nav-item i {
+      font-size: 1.2rem;
+    }
+
+    .nav-badge {
+      position: absolute;
+      top: -4px;
+      right: 12px;
+      background: var(--primary);
+      color: #000;
+      font-size: 0.65rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    /* CART DRAWER / BOTTOM SHEET */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .cart-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      border-top-left-radius: var(--radius-lg);
+      border-top-right-radius: var(--radius-lg);
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      z-index: 201;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-out;
+    }
+
+    @media (min-width: 992px) {
+      .cart-drawer {
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: auto;
+        width: 420px;
+        max-height: 100vh;
+        border-radius: 0;
+        border-left: 1px solid var(--border-color);
+        transform: translateX(100%);
+      }
+    }
+
+    .cart-overlay.open .cart-drawer {
+      transform: translateY(0);
+    }
+
+    @media (min-width: 992px) {
+      .cart-overlay.open .cart-drawer {
+        transform: translateX(0);
+      }
+    }
+
+    .cart-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      padding: 16px 20px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--dark-bg);
+      padding: 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .cart-item-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-item-img {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+    }
+
+    .cart-item-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .cart-item-price {
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .cart-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card-bg);
+      padding: 4px 8px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+    }
+
+    .cart-controls button {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .cart-footer {
+      padding: 20px;
+      border-top: 1px solid var(--border-color);
+      background: var(--card-bg);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .location-selector {
+      background: var(--dark-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+      width: 100%;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .cart-total-row.grand {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      border-top: 1px dashed var(--border-color);
+      padding-top: 8px;
+    }
+
+    .btn-checkout {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #000;
+      border: none;
+      padding: 14px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3);
+    }
+
+    /* TRACKING MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(6px);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 500px;
+      padding: 24px;
+      position: relative;
+      text-align: center;
+    }
+
+    .tracking-map-sim {
+      width: 100%;
+      height: 180px;
+      background: #0f172a;
+      border-radius: var(--radius-md);
+      margin: 16px 0;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .map-path {
+      position: absolute;
+      width: 70%;
+      height: 2px;
+      background: dashed var(--border-color);
+      border-top: 2px dashed var(--primary);
+    }
+
+    .scooter-icon {
+      position: absolute;
+      font-size: 1.5rem;
+      color: var(--primary);
+      animation: drive 4s infinite linear;
+    }
+
+    @keyframes drive {
+      0% { right: 10%; }
+      100% { right: 80%; }
+    }
+
+    .status-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: right;
+      margin-bottom: 12px;
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--border-color);
+    }
+
+    .status-step.active .status-dot {
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    /* EMPTY CART STATE */
+    .empty-cart {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-cart i {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+        <div>Scoot<span>Up</span></div>
+      </a>
+
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="ابحث عن مطعم، مكتبة، سوبرماركت..." oninput="handleSearch()">
+      </div>
+
+      <div class="header-actions">
+        <button class="btn-cart-desktop" onclick="toggleCart()">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>السلة</span>
+          <div class="cart-badge" id="cartBadgeDesktop">0</div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE SEARCH BAR -->
+  <div class="mobile-search">
+    <div class="search-bar">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="ابحث في جميع خدمات الجامعة..." oninput="handleSearchMobile(this.value)">
+    </div>
+  </div>
+
+  <!-- HERO BANNER -->
+  <div class="hero-container">
+    <div class="hero-card">
+      <div class="hero-content">
+        <div class="hero-tag"><i class="fa-solid fa-bolt"></i> توصيل سريع بالسكوتير الكهربائي</div>
+        <h1 class="hero-title">كل احتياجاتك الجامعية بتوصلك لحد باب مدرجك!</h1>
+        <p class="hero-desc">أكل، أدوات مكتبية، طباعة ملازم، وسوبرماركت. توصيل صديق للبيئة وسريع داخل الحرم الجامعي.</p>
+        <button class="hero-btn" onclick="scrollToCatalog()">
+          اطلب الآن <i class="fa-solid fa-arrow-left"></i>
+        </button>
+      </div>
+      <i class="fa-solid fa-motorcycle hero-icon-bg"></i>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-layout" id="catalog">
+    
+    <!-- CATEGORIES -->
+    <div class="section-header">
+      <div class="section-title"><i class="fa-solid fa-layer-group" style="color:var(--primary);"></i> الأقسام الرئيسية</div>
+    </div>
+
+    <div class="categories-scroll">
+      <div class="category-chip active" onclick="filterCategory('all', this)"><i class="fa-solid fa-border-all"></i> الكل</div>
+      <div class="category-chip" onclick="filterCategory('food', this)"><i class="fa-solid fa-utensils"></i> مطاعم وكافيهات</div>
+      <div class="category-chip" onclick="filterCategory('stationery', this)"><i class="fa-solid fa-print"></i> مكاتب وطباعة</div>
+      <div class="category-chip" onclick="filterCategory('market', this)"><i class="fa-solid fa-basket-shopping"></i> السوبرماركت</div>
+      <div class="category-chip" onclick="filterCategory('clothes', this)"><i class="fa-solid fa-shirt"></i> مستلزمات وملابس</div>
+    </div>
+
+    <!-- PRODUCTS GRID -->
+    <div class="products-grid" id="productsGrid">
+      <!-- Generated via JavaScript -->
+    </div>
+
+    <!-- SCOOT EXPRESS SERVICE BANNER -->
+    <div class="express-banner">
+      <div class="express-info">
+        <h3><i class="fa-solid fa-paper-plane"></i> خدمة ScootExpress (نقل أمانات)</h3>
+        <p>نسيت حاجتك في مبنى تاني؟ عاوز تبعث شيت أو حاجة لزميلك في كلية تانية؟ السكوتير هينقلها لك في دقائق!</p>
+      </div>
+      <button class="hero-btn" style="padding: 10px 20px; font-size:0.85rem;" onclick="openExpressModal()">
+        طلب نقل غرض
+      </button>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAVIGATION (MOBILE) -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" onclick="scrollToTop()">
+      <i class="fa-solid fa-house"></i>
+      <span>الرئيسية</span>
+    </button>
+    <button class="nav-item" onclick="toggleCart()">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span>السلة</span>
+      <div class="nav-badge" id="cartBadgeMobile">0</div>
+    </button>
+    <button class="nav-item" onclick="openExpressModal()">
+      <i class="fa-solid fa-paper-plane"></i>
+      <span>إكسبريس</span>
+    </button>
+    <button class="nav-item" onclick="openTrackingModal()">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>التتبع</span>
+    </button>
+  </nav>
+
+  <!-- CART DRAWER / OVERLAY -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCartOnOverlay(event)">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <div class="cart-title">
+          <i class="fa-solid fa-bag-shopping" style="color:var(--primary)"></i> سلة التسوق
+        </div>
+        <button class="btn-close" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="cart-items" id="cartItemsContainer">
+        <!-- Cart Items Generated Dynamic -->
+      </div>
+
+      <div class="cart-footer">
+        <label style="font-size: 0.8rem; color: var(--text-muted); font-weight:700;">اختر موقع الاستلام داخل الجامعة:</label>
+        <select class="location-selector" id="deliveryLocation">
+          <option value="main">المبنى الرئيسي - البوابة المركزية</option>
+          <option value="pharmacy">كلية الصيدلة - الدور الأرضي</option>
+          <option value="engineering">كلية الهندسة - ورش العمل</option>
+          <option value="medicine">كلية الطب - العيادات</option>
+          <option value="library">المكتبة المركزية</option>
+          <option value="foodcourt">مجمع المطاعم (الفود كورت)</option>
+        </select>
+
+        <div class="cart-total-row">
+          <span>المجموع الفرعي:</span>
+          <span id="subTotal">0 ج.م</span>
+        </div>
+        <div class="cart-total-row">
+          <span>رسوم التوصيل بالسكوتير:</span>
+          <span>10 ج.م</span>
+        </div>
+        <div class="cart-total-row grand">
+          <span>الإجمالي النهائي:</span>
+          <span id="grandTotal" style="color:var(--primary)">10 ج.م</span>
+        </div>
+
+        <button class="btn-checkout" onclick="processCheckout()">
+          تأكيد الطلب والدفع <i class="fa-solid fa-bolt"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE TRACKING MODAL -->
+  <div class="modal-overlay" id="trackingModal">
+    <div class="modal-card">
+      <button class="btn-close" style="position:absolute; left:16px; top:16px;" onclick="closeTrackingModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
+      <h3 style="margin-bottom: 6px;"><i class="fa-solid fa-motorcycle" style="color:var(--primary)"></i> تتبع السكوتير مباشر</h3>
+      <p style="font-size: 0.8rem; color:var(--text-muted);">رقم الطلب: #SC-88492</p>
+
+      <div class="tracking-map-sim">
+        <div class="map-path"></div>
+        <i class="fa-solid fa-motorcycle scooter-icon"></i>
+      </div>
+
+      <div style="margin-top: 16px;">
+        <div class="status-step active">
+          <div class="status-dot"></div>
+          <div>
+            <strong style="font-size:0.85rem;">تم استلام الطلب</strong>
+            <p style="font-size:0.75rem; color:var(--text-muted);">المطعم/المكتبة تقوم بتجهيز طلبك</p>
+          </div>
+        </div>
+        <div class="status-step active">
+          <div class="status-dot"></div>
+          <div>
+            <strong style="font-size:0.85rem;">السكوتير في الطريق إليك</strong>
+            <p style="font-size:0.75rem; color:var(--text-muted);">الكابتن أحمد يتجه نحو مبنى كلية الصيدلة</p>
+          </div>
+        </div>
+        <div class="status-step">
+          <div class="status-dot"></div>
+          <div>
+            <strong style="font-size:0.85rem;">وصل السكوتير</strong>
+            <p style="font-size:0.75rem; color:var(--text-muted);">يرجى الاستلام عند المدخل الرئيسي</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPRESS SERVICE MODAL -->
+  <div class="modal-overlay" id="expressModal">
+    <div class="modal-card">
+      <button class="btn-close" style="position:absolute; left:16px; top:16px;" onclick="closeExpressModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
+      <h3 style="margin-bottom: 12px;"><i class="fa-solid fa-paper-plane" style="color:var(--primary-dark)"></i> ScootExpress لنقل الأغراض</h3>
+      
+      <div style="display:flex; flex-direction:column; gap:10px; text-align:right;">
+        <label style="font-size:0.8rem; color:var(--text-muted);">من أين سينطلق السكوتير؟ (موقع الاستلام)</label>
+        <input type="text" id="expressFrom" class="location-selector" placeholder="مثال: مبنى العلوم - معمل 201">
+
+        <label style="font-size:0.8rem; color:var(--text-muted);">إلى أين ستسلم الأمانة؟ (موقع التسليم)</label>
+        <input type="text" id="expressTo" class="location-selector" placeholder="مثال: مبنى الهندسة - القاعة الكبرى">
+
+        <label style="font-size:0.8rem; color:var(--text-muted);">تفاصيل الغرض المراد نقله</label>
+        <textarea id="expressDetails" class="location-selector" rows="2" placeholder="مثال: ملف أوراق مهم + شاحن لاب توب"></textarea>
+
+        <button class="btn-checkout" style="margin-top:10px;" onclick="submitExpressOrder()">
+          طلب سفيَر ScootExpress (15 ج.م)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // DATA MODEL
+    const products = [
+      { id: 1, name: "وجبة برجر دجاج كلاسيك", category: "food", price: 65, vendor: "كافيه الفود كورت", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80", tag: "الأكثر طلباً" },
+      { id: 2, name: "سبانيش لاتيه بارد 350ml", category: "food", price: 35, vendor: "Scoot Cafe", image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=400&q=80", tag: "منعش" },
+      { id: 3, name: "طباعة ملزمة (50 صفحة ألوان)", category: "stationery", price: 25, vendor: "مكتبة العلوم والطباعة", image: "https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?auto=format&fit=crop&w=400&q=80", tag: "تسليم فورى" },
+      { id: 4, name: "قلم جاف زبرة أزرق (علبة 3 قطع)", category: "stationery", price: 18, vendor: "مكتبة الفنون", image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=400&q=80", tag: "مستلزمات" },
+      { id: 5, name: "ساندوتش شاورما دجاج سوبر", category: "food", price: 45, vendor: "مطعم الشاطبي", image: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=400&q=80", tag: "ساخن" },
+      { id: 6, name: "مياه معدنية 1.5 لتر + شيبسي", category: "market", price: 20, vendor: "ماركت البركة", image: "https://images.unsplash.com/photo-1527960471264-932f39eb5846?auto=format&fit=crop&w=400&q=80", tag: "سريع" },
+      { id: 7, name: "هودي جامعة باللوجو الرسمي", category: "clothes", price: 280, vendor: "متجر الجامعيين", image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=400&q=80", tag: "خامة ممتازة" },
+      { id: 8, name: "دفتر محاضر سلك 200 ورقة", category: "stationery", price: 40, vendor: "مكتبة الجامعة", image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80", tag: "أدوات" }
+    ];
+
+    let cart = [];
+
+    // RENDER PRODUCTS
+    function renderProducts(itemsToRender) {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+
+      if (itemsToRender.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">لا توجد نتائج تطابق بحثك.</p>`;
+        return;
+      }
+
+      itemsToRender.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div class="product-img-wrapper">
+            <span class="product-tag">${product.tag}</span>
+            <img src="${product.image}" alt="${product.name}" class="product-img" loading="lazy">
+          </div>
+          <div class="product-details">
+            <div>
+              <div class="product-vendor"><i class="fa-solid fa-store"></i> ${product.vendor}</div>
+              <h3 class="product-title">${product.name}</h3>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">${product.price} ج.م</span>
+              <button class="btn-add" onclick="addToCart(${product.id})" title="إضافة للسلة">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // FILTER CATEGORIES
+    function filterCategory(category, element) {
+      document.querySelectorAll('.category-chip').forEach(chip => chip.classList.remove('active'));
+      element.classList.add('active');
+
+      if (category === 'all') {
+        renderProducts(products);
+      } else {
+        const filtered = products.filter(p => p.category === category);
+        renderProducts(filtered);
+      }
+    }
+
+    // SEARCH FUNCTIONALITY
+    function handleSearch() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.vendor.toLowerCase().includes(query));
+      renderProducts(filtered);
+    }
+
+    function handleSearchMobile(query) {
+      const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.vendor.toLowerCase().includes(query));
+      renderProducts(filtered);
+    }
+
+    // CART OPERATIONS
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      const existingItem = cart.find(item => item.id === productId);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+
+      updateCartUI();
+    }
+
+    function updateCartQuantity(productId, change) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+
+      item.quantity += change;
+      if (item.quantity <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+      }
+
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const cartContainer = document.getElementById('cartItemsContainer');
+      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+      document.getElementById('cartBadgeDesktop').innerText = totalCount;
+      document.getElementById('cartBadgeMobile').innerText = totalCount;
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = `
+          <div class="empty-cart">
+            <i class="fa-solid fa-cart-flatbed"></i>
+            <p>السلة فارغة حالياً</p>
+            <span style="font-size:0.75rem;">تصفح الأقسام وأضف ما تحتاجه</span>
+          </div>
+        `;
+        document.getElementById('subTotal').innerText = `0 ج.م`;
+        document.getElementById('grandTotal').innerText = `10 ج.م`;
+        return;
+      }
+
+      cartContainer.innerHTML = '';
+      let subTotal = 0;
+
+      cart.forEach(item => {
+        subTotal += item.price * item.quantity;
+        const itemEl = document.createElement('div');
+        itemEl.className = 'cart-item';
+        itemEl.innerHTML = `
+          <div class="cart-item-info">
+            <img src="${item.image}" class="cart-item-img">
+            <div>
+              <div class="cart-item-title">${item.name}</div>
+              <div class="cart-item-price">${item.price * item.quantity} ج.م</div>
+            </div>
+          </div>
+          <div class="cart-controls">
+            <button onclick="updateCartQuantity(${item.id}, -1)">-</button>
+            <span style="font-size:0.85rem; font-weight:800;">${item.quantity}</span>
+            <button onclick="updateCartQuantity(${item.id}, 1)">+</button>
+          </div>
+        `;
+        cartContainer.appendChild(itemEl);
+      });
+
+      document.getElementById('subTotal').innerText = `${subTotal} ج.م`;
+      document.getElementById('grandTotal').innerText = `${subTotal + 10} ج.م`;
+    }
+
+    function toggleCart() {
+      document.getElementById('cartOverlay').classList.toggle('open');
+    }
+
+    function closeCartOnOverlay(e) {
+      if (e.target.id === 'cartOverlay') {
+        toggleCart();
+      }
+    }
+
+    // CHECKOUT PROCESS
+    function processCheckout() {
+      if (cart.length === 0) {
+        alert('السلة فارغة! قم بطلب بعض المنتجات أولاً.');
+        return;
+      }
+
+      toggleCart();
+      cart = [];
+      updateCartUI();
+      openTrackingModal();
+    }
+
+    // TRACKING MODAL
+    function openTrackingModal() {
+      document.getElementById('trackingModal').classList.add('active');
+    }
+
+    function closeTrackingModal() {
+      document.getElementById('trackingModal').classList.remove('active');
+    }
+
+    // EXPRESS MODAL
+    function openExpressModal() {
+      document.getElementById('expressModal').classList.add('active');
+    }
+
+    function closeExpressModal() {
+      document.getElementById('expressModal').classList.remove('active');
+    }
+
+    function submitExpressOrder() {
+      const from = document.getElementById('expressFrom').value;
+      const to = document.getElementById('expressTo').value;
+      const details = document.getElementById('expressDetails').value;
+
+      if (!from || !to || !details) {
+        alert('يرجى ملء كافة تفاصيل طلب النقل');
+        return;
+      }
+
+      closeExpressModal();
+      alert('تم استلام طلب النقل بنجاح! السكوتير في طريقه لتسلم الأمانة.');
+      openTrackingModal();
+    }
+
+    // SCROLL HELPERS
+    function scrollToCatalog() {
+      document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // INIT
+    renderProducts(products);
+    updateCartUI();
+  </script>
+</body>
+</html>
